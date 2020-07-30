@@ -2,9 +2,13 @@ import React, { Component } from "react";
 
 export default class Counter extends Component {
   //   state = {
-  //     number: 0,
+  //     counterNum: "",
   //   };
+
   render() {
-    return <>Counter : </>;
+    return (
+      //   <div add={this.props.addToCounter}>Counter : {this.props.counterNum}</div>
+      <div>Counter : {this.props.counterNum}</div>
+    );
   }
 }

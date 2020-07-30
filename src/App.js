@@ -6,7 +6,7 @@ import Counter from "./Components/Counter/Counter.jsx";
 
 export default class App extends Component {
   state = {
-    counter: 0,
+    number: 0,
   };
   render() {
     return (
@@ -16,18 +16,16 @@ export default class App extends Component {
 
         <div className="App">
           <p>Press the button to raise the number:</p>
-          <Counter />
-          {this.state.counter}
-          <Button onClick={this.addToCounter} />
-          <button onClick={this.addToCounter}>Another</button>
+          <Counter counterNum={this.state.number} />
+          <br />
+          <br />
+          <Button addToCounter={this.addToCounter} add={this.addToCounter} />
         </div>
       </div>
     );
   }
 
   addToCounter = (e) => {
-    e.preventDefault();
-    console.log("clicked");
-    // this.state.counter++;
+    this.setState({ number: 6 });
   };
 }

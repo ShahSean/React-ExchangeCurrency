@@ -5,7 +5,9 @@ export default class Button extends Component {
   render() {
     return (
       <div>
-        <button className="add-btn">Add</button>
+        <button className="add-btn" onClick={this.props.add}>
+          Add
+        </button>
       </div>
     );
   }
