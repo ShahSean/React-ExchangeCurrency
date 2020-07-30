@@ -1,18 +1,33 @@
 import React, { Component } from "react";
-import comp1 from "./Mycomp";
 import "./App.css";
-import Mycomp from "./Mycomp";
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header.jsx";
+import Button from "./Components/Button/Button.jsx";
+import Counter from "./Components/Counter/Counter.jsx";
 
-function App() {
-  return (
-    <div>
-      <Header />
-      Hello
-      <br />
-      <Mycomp />
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    counter: 0,
+  };
+  render() {
+    return (
+      <div>
+        <Header />
+        <br />
+
+        <div className="App">
+          <p>Press the button to raise the number:</p>
+          <Counter />
+          {this.state.counter}
+          <Button onClick={this.addToCounter} />
+          <button onClick={this.addToCounter}>Another</button>
+        </div>
+      </div>
+    );
+  }
+
+  addToCounter = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+    // this.state.counter++;
+  };
 }
-
-export default App;
