@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import comp1 from "./Mycomp";
+import "./App.css";
+import Mycomp from "./Mycomp";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Hello
+      <br />
+      <Mycomp />
     </div>
   );
 }
 
 export default App;
+// counter
+// Curency or unity conversion and connect it to google
+
+// Color picker --> 3 options --> 3 slider to pick --> input text type number
