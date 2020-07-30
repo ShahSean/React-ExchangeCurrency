@@ -19,13 +19,16 @@ export default class App extends Component {
           <Counter counterNum={this.state.number} />
           <br />
           <br />
-          <Button addToCounter={this.addToCounter} add={this.addToCounter} />
+          <Button add={this.addToCounter} />
         </div>
       </div>
     );
   }
 
   addToCounter = (e) => {
-    this.setState({ number: 6 });
+    console.log("clicked");
+    let newCounter = this.state.number;
+    newCounter++;
+    this.setState({ number: newCounter });
   };
 }
