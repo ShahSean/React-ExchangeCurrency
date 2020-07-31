@@ -18,8 +18,9 @@ export default class CurrEx extends Component {
             type="number"
             step="0.00001"
             placeholder="0.000"
-            // value={this.state.value}
-            onChange={this.convertor}
+            onChange={(e) => {
+              this.setState({ value: e.target.value });
+            }}
           />
         </div>
         <br />
@@ -31,14 +32,13 @@ export default class CurrEx extends Component {
             <option value="US">US Dollar</option>
             <option value="Canada">Canadian Dollar</option>
           </select>
-
-          {/* <input type="number" step="0.00001" /> */}
+          | |----> <output>{this.convertor()}</output>
         </div>
       </>
     );
   }
-  convertor = (e) => {
-    this.setState({ value: e.target.value });
-    console.log(e.target.value);
+  convertor = () => {
+    let currentValue = this.state.value;
+    return currentValue * 1.42;
   };
 }
