@@ -5,9 +5,13 @@ export default class CurrEx extends Component {
     value: 0.0,
   };
   componentDidMount() {
+    let val1 = "USD";
+    let val2 = "CAD";
     axios
-      .get("https://api.exchangeratesapi.io/latest?symbols=USD,GBP")
-      .then((res) => console.log(res.data));
+      .get(
+        "https://api.exchangeratesapi.io/latest?symbols=" + val1 + "," + val2
+      )
+      .then((res) => console.log(res.data.rates.CAD));
   }
   render() {
     return (
