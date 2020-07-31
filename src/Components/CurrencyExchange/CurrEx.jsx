@@ -2,7 +2,17 @@ import React, { Component } from "react";
 import axios from "axios";
 export default class CurrEx extends Component {
   state = {
-    value: 0.0,
+    userInput: 0,
+    firstCurrency: [
+      { title: "US Dollar", abreviation: "USD" },
+      { title: "Canada Dollar", abreviation: "CAD" },
+      { title: "Pound Sterling", abreviation: "GBP" },
+    ],
+    secondCurrency: [
+      { title: "US Dollar", abreviation: "USD" },
+      { title: "Canada Dollar", abreviation: "CAD" },
+      { title: "Pound Sterling", abreviation: "GBP" },
+    ],
   };
   componentDidMount() {
     let val1 = "USD";
@@ -28,7 +38,7 @@ export default class CurrEx extends Component {
             step="0.00001"
             placeholder="0.000"
             onChange={(e) => {
-              this.setState({ value: e.target.value });
+              this.setState({ userInput: e.target.value });
             }}
           />
         </div>
@@ -47,7 +57,14 @@ export default class CurrEx extends Component {
     );
   }
   convertor = () => {
-    let currentValue = this.state.value;
+    let val1 = "USD";
+    let val2 = "CAD";
+    axios
+      .get(
+        "https://api.exchangeratesapi.io/latest?symbols=" + val1 + "," + val2
+      )
+      .then((res) => console.log(res.data.rates.CAD));
+    let currentValue = this.state.userInput;
     return currentValue * 1.42;
   };
 }
