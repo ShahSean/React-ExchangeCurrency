@@ -4,34 +4,34 @@ export default class CurrEx extends Component {
   state = {
     userInput: 0,
     firstCurrency: [
-      { title: "US Dollar", abreviation: "USD" },
-      { title: "Canada Dollar", abreviation: "CAD" },
-      { title: "Pound Sterling", abreviation: "GBP" },
+      { title: "US Dollar", abbreviation: "USD" },
+      { title: "Canada Dollar", abbreviation: "CAD" },
+      { title: "Pound Sterling", abbreviation: "GBP" },
     ],
     secondCurrency: [
-      { title: "US Dollar", abreviation: "USD" },
-      { title: "Canada Dollar", abreviation: "CAD" },
-      { title: "Pound Sterling", abreviation: "GBP" },
+      { title: "US Dollar", abbreviation: "USD" },
+      { title: "Canada Dollar", abbreviation: "CAD" },
+      { title: "Pound Sterling", abbreviation: "GBP" },
     ],
   };
-  componentDidMount() {
-    let val1 = "USD";
-    let val2 = "CAD";
-    axios
-      .get(
-        "https://api.exchangeratesapi.io/latest?symbols=" + val1 + "," + val2
-      )
-      .then((res) => console.log(res.data.rates.CAD));
-  }
+
   render() {
     return (
       <>
         <div className="unconverted">
           <label> Currency I have : </label>
           <select name="coutries" id="countries">
-            <option value="US">US Dollar</option>
+            {this.state.firstCurrency.map((currency) => {
+              <option value={this.getAbbreviation(currency)}>
+                {this.getTitle(currency)}
+              </option>;
+            })}
+            {/*               
+            <option value={this.state.firstCurrency.abbreviation}>
+              {this.state.firstCurrency.title}
+            </option>
             <option value="Canada">Canadian Dollar</option>
-            <option value="UK">UK Pound</option>
+            <option value="UK">UK Pound</option> */}
           </select>
           <input
             type="number"
@@ -67,4 +67,6 @@ export default class CurrEx extends Component {
     let currentValue = this.state.userInput;
     return currentValue * 1.42;
   };
+  getAbbreviation = (currency) => currency.abbreviation;
+  getTitle = (currency) => currency.title;
 }
