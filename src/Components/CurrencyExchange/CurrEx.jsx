@@ -20,18 +20,16 @@ export default class CurrEx extends Component {
       <>
         <div className="unconverted">
           <label> Currency I have : </label>
-          <select name="coutries" id="countries">
-            {this.state.firstCurrency.map((currency) => {
+          <select name="coutries" id="countries" defaultValue="USD">
+            {/* {this.state.firstCurrency.map((currency) => {
               <option value={this.getAbbreviation(currency)}>
                 {this.getTitle(currency)}
               </option>;
-            })}
-            {/*               
-            <option value={this.state.firstCurrency.abbreviation}>
-              {this.state.firstCurrency.title}
-            </option>
+            })} */}
+
+            <option value="USD">US Dollar</option>
             <option value="Canada">Canadian Dollar</option>
-            <option value="UK">UK Pound</option> */}
+            <option value="GBP">UK Pound</option>
           </select>
           <input
             type="number"
@@ -46,10 +44,10 @@ export default class CurrEx extends Component {
         <br />
         <div className="converted">
           <label>Currency I want : </label>
-          <select name="coutries" id="countries">
-            <option value="UK">UK Pound</option>
-            <option value="US">US Dollar</option>
+          <select name="coutries" id="countries" defaultValue="GBP">
+            <option value="USD">US Dollar</option>
             <option value="Canada">Canadian Dollar</option>
+            <option value="GBP">UK Pound</option>
           </select>
           | |----> <output>{this.convertor()}</output>
         </div>
@@ -59,14 +57,25 @@ export default class CurrEx extends Component {
   convertor = () => {
     let val1 = "USD";
     let val2 = "CAD";
+    let userInput = this.state.userInput;
+    let rate = 1;
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?symbols=" + val1 + "," + val2
       )
-      .then((res) => console.log(res.data.rates.CAD));
-    let currentValue = this.state.userInput;
-    return currentValue * 1.42;
+      .then((result) =>
+        // this.rate = res.data.rates.CAD;
+        {
+          console.log(result);
+          rate = result.data.rates.CAD;
+          console.log(rate);
+          console.log(result.data.rates.CAD);
+        }
+      );
+    console.log("final rate", rate);
+
+    return userInput * rate;
   };
-  getAbbreviation = (currency) => currency.abbreviation;
-  getTitle = (currency) => currency.title;
+  //   getAbbreviation = (currency) => currency.abbreviation;
+  //   getTitle = (currency) => currency.title;
 }
