@@ -3,6 +3,7 @@ import axios from "axios";
 export default class CurrEx extends Component {
   state = {
     userInput: 0,
+    rate: 1,
     firstCurrency: [
       { title: "US Dollar", abbreviation: "USD" },
       { title: "Canada Dollar", abbreviation: "CAD" },
@@ -14,6 +15,11 @@ export default class CurrEx extends Component {
       { title: "Pound Sterling", abbreviation: "GBP" },
     ],
   };
+
+  constructor(props) {
+    super(props);
+    this.updateRate();
+  }
 
   render() {
     return (
@@ -41,6 +47,7 @@ export default class CurrEx extends Component {
           />
         </div>
         <br />
+        Rate is: {this.state.rate}
         <br />
         <div className="converted">
           <label>Currency I want : </label>
@@ -54,27 +61,22 @@ export default class CurrEx extends Component {
       </>
     );
   }
-  convertor = () => {
+  updateRate() {
     let val1 = "USD";
     let val2 = "CAD";
-    let userInput = this.state.userInput;
-    let rate = 1;
+
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?symbols=" + val1 + "," + val2
       )
-      .then((result) =>
-        // this.rate = res.data.rates.CAD;
-        {
-          console.log(result);
-          rate = result.data.rates.CAD;
-          console.log(rate);
-          console.log(result.data.rates.CAD);
-        }
-      );
-    console.log("final rate", rate);
+      .then((result) => {
+        this.setState({ rate: result.data.rates.CAD });
+      });
+  }
 
-    return userInput * rate;
+  convertor = () => {
+    let userInput = this.state.userInput;
+    return userInput * this.state.rate;
   };
   //   getAbbreviation = (currency) => currency.abbreviation;
   //   getTitle = (currency) => currency.title;
