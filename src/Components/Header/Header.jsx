@@ -13,7 +13,7 @@ export default class Header extends Component {
               Counter
             </Link>
             | |
-            <Link to="/currencyExchangea" style={{ color: "white" }}>
+            <Link to="/currencyExchange" style={{ color: "white" }}>
               Exchange Currency
             </Link>
           </div>

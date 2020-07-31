@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./Components/Header/Header.jsx";
 import Button from "./Components/Button/Button.jsx";
 import Counter from "./Components/Counter/Counter.jsx";
+import CurrEx from "./Components/CurrencyExchange/CurrEx.jsx";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 export default class App extends Component {
@@ -33,7 +34,7 @@ export default class App extends Component {
             path="/currencyExchange"
             render={(props) => (
               <>
-                <div> Hello</div>
+                <CurrEx />
               </>
             )}
           />
