@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 export default class CurrEx extends Component {
   state = {
     value: 0.0,
   };
+  componentDidMount() {
+    axios
+      .get("https://api.exchangeratesapi.io/latest?symbols=USD,GBP")
+      .then((res) => console.log(res.data));
+  }
   render() {
     return (
       <>
@@ -26,7 +31,7 @@ export default class CurrEx extends Component {
         <br />
         <br />
         <div className="converted">
-          <label>Currency I want to convert to: </label>
+          <label>Currency I want : </label>
           <select name="coutries" id="countries">
             <option value="UK">UK Pound</option>
             <option value="US">US Dollar</option>
