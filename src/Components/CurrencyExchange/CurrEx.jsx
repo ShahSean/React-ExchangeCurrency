@@ -4,15 +4,10 @@ export default class CurrEx extends Component {
   state = {
     userInput: 0,
     rate: 1,
-    firstCurrency: [
-      { title: "US Dollar", abbreviation: "USD" },
-      { title: "Canada Dollar", abbreviation: "CAD" },
-      { title: "Pound Sterling", abbreviation: "GBP" },
-    ],
-    secondCurrency: [
-      { title: "US Dollar", abbreviation: "USD" },
-      { title: "Canada Dollar", abbreviation: "CAD" },
-      { title: "Pound Sterling", abbreviation: "GBP" },
+    currencyList: [
+      { title: "US Dollar", abbreviation: "USD", id: this.idGen() },
+      { title: "Canada Dollar", abbreviation: "CAD", id: this.idGen() },
+      { title: "Pound Sterling", abbreviation: "GBP", id: this.idGen() },
     ],
   };
 
@@ -27,15 +22,13 @@ export default class CurrEx extends Component {
         <div className="unconverted">
           <label> Currency I have : </label>
           <select name="coutries" id="countries" defaultValue="USD">
-            {/* {this.state.firstCurrency.map((currency) => {
-              <option value={this.getAbbreviation(currency)}>
-                {this.getTitle(currency)}
-              </option>;
-            })} */}
-
+            {this.state.currencyList.map((currency) => {
+              <option value={this.state.currencyList.abbreviation}>1</option>;
+            })}
+            {/* 
             <option value="USD">US Dollar</option>
             <option value="Canada">Canadian Dollar</option>
-            <option value="GBP">UK Pound</option>
+            <option value="GBP">UK Pound</option> */}
           </select>
           <input
             type="number"
@@ -56,11 +49,17 @@ export default class CurrEx extends Component {
             <option value="Canada">Canadian Dollar</option>
             <option value="GBP">UK Pound</option>
           </select>
-          | |----> <output>{this.convertor()}</output>
+          | | | | <output>{this.convertor()}</output>
         </div>
       </>
     );
   }
+
+  // Random ID generator
+  idGen = () => Math.floor(Math.random() * 100000000);
+
+  // This Function gets the latest rate from European Central Bank API
+  // https://exchangeratesapi.io/
   updateRate() {
     let val1 = "USD";
     let val2 = "CAD";
@@ -78,6 +77,6 @@ export default class CurrEx extends Component {
     let userInput = this.state.userInput;
     return userInput * this.state.rate;
   };
-  //   getAbbreviation = (currency) => currency.abbreviation;
-  //   getTitle = (currency) => currency.title;
+  getAbbreviation = (currency) => currency.abbreviation;
+  getTitle = (currency) => currency.title;
 }
