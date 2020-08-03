@@ -5,21 +5,20 @@ import axios from "axios";
 const idGen = () => Math.floor(Math.random() * 100000000);
 
 export default class CurrEx extends Component {
-  state = {
-    userInput: 0,
-    rate: 1,
-    firstSelectedCurrency: "USD",
-    secondSelectedCurrency: "CAD",
-    currencyList: [
-      { title: "US Dollar", abbreviation: "USD", id: idGen() },
-      { title: "Canada Dollar", abbreviation: "CAD", id: idGen() },
-      { title: "Pound Sterling", abbreviation: "GBP", id: idGen() },
-    ],
-  };
-
   constructor(props) {
     super(props);
     this.updateRate();
+    this.state = {
+      userInput: 0,
+      rate: 1,
+      firstSelectedCurrency: "USD",
+      secondSelectedCurrency: "CAD",
+      currencyList: [
+        { title: "US Dollar", abbreviation: "USD", id: idGen() },
+        { title: "Canada Dollar", abbreviation: "CAD", id: idGen() },
+        { title: "Pound Sterling", abbreviation: "GBP", id: idGen() },
+      ],
+    };
   }
 
   getInitialSelectFirst = () => {
@@ -27,7 +26,6 @@ export default class CurrEx extends Component {
   };
 
   render() {
-    let message = "the selection is: " + this.state.firstSelectedCurrency;
     return (
       <>
         <div className="unconverted">
@@ -40,17 +38,12 @@ export default class CurrEx extends Component {
           >
             {this.state.currencyList.map((currency) => {
               return (
-                <option value={currency.abbreviation}>{currency.title}</option>
+                <option value={currency.abbreviation} key={currency.id}>
+                  {currency.title}
+                </option>
               );
             })}
           </select>
-          <p> {message}</p>
-          {/* {function bla() {
-            let boo = document.queryselector("#currencyOptionsList1");
-            console.log("boo value is : ", boo.value);
-            return boo.value;
-          }} */}
-          {/* <output> This is what you have selected: {this.bla}</output> */}
           <br />
           <input
             type="number"
@@ -66,14 +59,22 @@ export default class CurrEx extends Component {
         <br />
         <div className="converted">
           <label>Currency I want : </label>
-          <select name="currency" id="currencyOptionsList2" defaultValue="GBP">
+          <select
+            name="currency"
+            id="currencyOptionsList2"
+            defaultValue={this.state.secondSelectedCurrency}
+            onChange={this.secondCurrencySelectionHandler}
+          >
             {this.state.currencyList.map((currency) => {
               return (
-                <option value={currency.abbreviation}>{currency.title}</option>
+                <option value={currency.abbreviation} key={currency.id}>
+                  {currency.title}
+                </option>
               );
             })}
           </select>
-          | | | | <output>{this.convertor()}</output>
+          <br />
+          <br />| | | | <output>{this.convertor()}</output>
         </div>
       </>
     );
@@ -81,6 +82,10 @@ export default class CurrEx extends Component {
   firstCurrencySelectionHandler = (e) => {
     console.log("I was called", e.target.value);
     this.setState({ firstSelectedCurrency: e.target.value });
+  };
+  secondCurrencySelectionHandler = (e) => {
+    console.log("I was called", e.target.value);
+    this.setState({ secondSelectedCurrency: e.target.value });
   };
 
   // This Function gets the latest rate from European Central Bank API
