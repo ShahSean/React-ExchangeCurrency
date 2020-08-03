@@ -8,6 +8,8 @@ export default class CurrEx extends Component {
   state = {
     userInput: 0,
     rate: 1,
+    firstSelectedCurrency: "USD",
+    secondSelectedCurrency: "CAD",
     currencyList: [
       { title: "US Dollar", abbreviation: "USD", id: idGen() },
       { title: "Canada Dollar", abbreviation: "CAD", id: idGen() },
@@ -20,18 +22,36 @@ export default class CurrEx extends Component {
     this.updateRate();
   }
 
+  getInitialSelectFirst = () => {
+    return this.state.firstSelectedCurrency;
+  };
+
   render() {
+    let message = "the selection is: " + this.state.firstSelectedCurrency;
     return (
       <>
         <div className="unconverted">
           <label> Currency I have : </label>
-          <select name="coutries" id="countries" defaultValue="USD">
+          <select
+            name="currency"
+            id="currencyOptionsList1"
+            defaultValue={this.state.firstSelectedCurrency}
+            onChange={this.firstCurrencySelectionHandler}
+          >
             {this.state.currencyList.map((currency) => {
               return (
                 <option value={currency.abbreviation}>{currency.title}</option>
               );
             })}
           </select>
+          <p> {message}</p>
+          {/* {function bla() {
+            let boo = document.queryselector("#currencyOptionsList1");
+            console.log("boo value is : ", boo.value);
+            return boo.value;
+          }} */}
+          {/* <output> This is what you have selected: {this.bla}</output> */}
+          <br />
           <input
             type="number"
             step="0.00001"
@@ -46,16 +66,22 @@ export default class CurrEx extends Component {
         <br />
         <div className="converted">
           <label>Currency I want : </label>
-          <select name="coutries" id="countries" defaultValue="GBP">
-            <option value="USD">US Dollar</option>
-            <option value="Canada">Canadian Dollar</option>
-            <option value="GBP">UK Pound</option>
+          <select name="currency" id="currencyOptionsList2" defaultValue="GBP">
+            {this.state.currencyList.map((currency) => {
+              return (
+                <option value={currency.abbreviation}>{currency.title}</option>
+              );
+            })}
           </select>
           | | | | <output>{this.convertor()}</output>
         </div>
       </>
     );
   }
+  firstCurrencySelectionHandler = (e) => {
+    console.log("I was called", e.target.value);
+    this.setState({ firstSelectedCurrency: e.target.value });
+  };
 
   // This Function gets the latest rate from European Central Bank API
   // https://exchangeratesapi.io/
@@ -76,6 +102,4 @@ export default class CurrEx extends Component {
     let userInput = this.state.userInput;
     return userInput * this.state.rate;
   };
-  getAbbreviation = (currency) => currency.abbreviation;
-  getTitle = (currency) => currency.title;
 }
