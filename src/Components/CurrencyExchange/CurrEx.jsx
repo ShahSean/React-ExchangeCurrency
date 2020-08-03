@@ -7,7 +7,7 @@ const idGen = () => Math.floor(Math.random() * 100000000);
 export default class CurrEx extends Component {
   constructor(props) {
     super(props);
-    this.updateRate();
+
     this.state = {
       userInput: 0,
       rate: 1,
@@ -15,10 +15,13 @@ export default class CurrEx extends Component {
       secondSelectedCurrency: "CAD",
       currencyList: [
         { title: "US Dollar", abbreviation: "USD", id: idGen() },
-        { title: "Canada Dollar", abbreviation: "CAD", id: idGen() },
+        { title: "Canadian Dollar", abbreviation: "CAD", id: idGen() },
         { title: "Pound Sterling", abbreviation: "GBP", id: idGen() },
       ],
     };
+  }
+  componentDidMount() {
+    this.updateRate();
   }
 
   getInitialSelectFirst = () => {
