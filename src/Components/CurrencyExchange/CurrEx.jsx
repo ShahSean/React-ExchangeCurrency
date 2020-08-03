@@ -85,6 +85,7 @@ export default class CurrEx extends Component {
   firstCurrencySelectionHandler = (e) => {
     console.log("I was called", e.target.value);
     this.setState({ firstSelectedCurrency: e.target.value });
+    this.updateRate();
   };
   secondCurrencySelectionHandler = (e) => {
     console.log("I was called", e.target.value);
@@ -94,15 +95,20 @@ export default class CurrEx extends Component {
   // This Function gets the latest rate from European Central Bank API
   // https://exchangeratesapi.io/
   updateRate() {
-    let val1 = "USD";
-    let val2 = "CAD";
+    // let val1 = "USD";
+    // let val2 = "CAD";
 
     axios
       .get(
-        "https://api.exchangeratesapi.io/latest?symbols=" + val1 + "," + val2
+        "https://api.exchangeratesapi.io/latest?symbols=" +
+          this.state.firstSelectedCurrency +
+          "," +
+          this.state.secondSelectedCurrency
       )
       .then((result) => {
-        this.setState({ rate: result.data.rates.CAD });
+        console.log(result.data.rates);
+        console.log("it's", Object.keys(result.data.rates)[0]);
+        this.setState({ rate: Object.keys(result.data.rates)[1] });
       });
   }
 
