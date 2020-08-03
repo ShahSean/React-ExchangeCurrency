@@ -10,7 +10,7 @@ export default class CurrEx extends Component {
 
     this.state = {
       userInput: 0,
-      rate: 1,
+      rates: {},
       firstSelectedCurrency: "USD",
       secondSelectedCurrency: "CAD",
       currencyList: [
@@ -20,6 +20,19 @@ export default class CurrEx extends Component {
       ],
     };
   }
+
+  getRate(fromCurrency, toCurrency) {
+    const { rates } = this.state;
+    // String manipulation
+    const currency_key = `${fromCurrency}->${toCurrency}`;
+    if (currency_key in rates) return rates[currency_key];
+    else {
+      // TODO: update the currency bank for the current value
+      //       if there is another such fetch in the works, don't run it again
+      return 1;
+    }
+  }
+
   componentDidMount() {
     this.updateRate();
   }
@@ -83,21 +96,16 @@ export default class CurrEx extends Component {
     );
   }
   firstCurrencySelectionHandler = (e) => {
-    console.log("I was called", e.target.value);
     this.setState({ firstSelectedCurrency: e.target.value });
     this.updateRate();
   };
   secondCurrencySelectionHandler = (e) => {
-    console.log("I was called", e.target.value);
     this.setState({ secondSelectedCurrency: e.target.value });
   };
 
   // This Function gets the latest rate from European Central Bank API
   // https://exchangeratesapi.io/
   updateRate() {
-    // let val1 = "USD";
-    // let val2 = "CAD";
-
     axios
       .get(
         "https://api.exchangeratesapi.io/latest?symbols=" +
@@ -106,9 +114,7 @@ export default class CurrEx extends Component {
           this.state.secondSelectedCurrency
       )
       .then((result) => {
-        console.log(result.data.rates);
-        console.log("it's", Object.keys(result.data.rates)[0]);
-        this.setState({ rate: Object.keys(result.data.rates)[1] });
+        this.setState({ rate: Object.values(result.data.rates)[1] });
       });
   }
 
