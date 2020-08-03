@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
+
+// Random ID generator
+const idGen = () => Math.floor(Math.random() * 100000000);
+
 export default class CurrEx extends Component {
   state = {
     userInput: 0,
     rate: 1,
     currencyList: [
-      { title: "US Dollar", abbreviation: "USD", id: this.idGen() },
-      { title: "Canada Dollar", abbreviation: "CAD", id: this.idGen() },
-      { title: "Pound Sterling", abbreviation: "GBP", id: this.idGen() },
+      { title: "US Dollar", abbreviation: "USD", id: idGen() },
+      { title: "Canada Dollar", abbreviation: "CAD", id: idGen() },
+      { title: "Pound Sterling", abbreviation: "GBP", id: idGen() },
     ],
   };
 
@@ -23,12 +27,10 @@ export default class CurrEx extends Component {
           <label> Currency I have : </label>
           <select name="coutries" id="countries" defaultValue="USD">
             {this.state.currencyList.map((currency) => {
-              <option value={this.state.currencyList.abbreviation}>1</option>;
+              return (
+                <option value={currency.abbreviation}>{currency.title}</option>
+              );
             })}
-            {/* 
-            <option value="USD">US Dollar</option>
-            <option value="Canada">Canadian Dollar</option>
-            <option value="GBP">UK Pound</option> */}
           </select>
           <input
             type="number"
@@ -54,9 +56,6 @@ export default class CurrEx extends Component {
       </>
     );
   }
-
-  // Random ID generator
-  idGen = () => Math.floor(Math.random() * 100000000);
 
   // This Function gets the latest rate from European Central Bank API
   // https://exchangeratesapi.io/
