@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-// Random ID generator
-const idGen = () => Math.floor(Math.random() * 100000000);
-
 export default class CurrEx extends Component {
   constructor(props) {
     super(props);
@@ -11,13 +8,12 @@ export default class CurrEx extends Component {
     this.state = {
       userInput: 0,
       rate: 1,
-      rates: {},
       firstSelectedCurrency: "USD",
       secondSelectedCurrency: "CAD",
       currencyList: [
-        { title: "US Dollar", abbreviation: "USD", id: idGen() },
-        { title: "Canadian Dollar", abbreviation: "CAD", id: idGen() },
-        { title: "Pound Sterling", abbreviation: "GBP", id: idGen() },
+        { title: "US Dollar", abbreviation: "USD", id: this.idGen() },
+        { title: "Canadian Dollar", abbreviation: "CAD", id: this.idGen() },
+        { title: "Pound Sterling", abbreviation: "GBP", id: this.idGen() },
       ],
     };
   }
@@ -95,22 +91,22 @@ export default class CurrEx extends Component {
       </>
     );
   }
+  // Random ID generator
+  idGen = () => Math.floor(Math.random() * 100000000);
+
+  // Whenever the fromCurrency changes, this function will be called
   firstCurrencySelectionHandler = (e) => {
     this.setState({ firstSelectedCurrency: e.target.value });
-    console.log("This is the  first selction: ", e.target.value);
     this.updateRate(e.target.value, this.state.secondSelectedCurrency);
   };
+  // Whenever the toCurrency changes, this function will be called
   secondCurrencySelectionHandler = (e) => {
     this.setState({ secondSelectedCurrency: e.target.value });
-    console.log("This is the 2nd selction: ", e.target.value);
-
     this.updateRate(this.state.firstSelectedCurrency, e.target.value);
   };
 
   // This Function gets the latest rate from European Central Bank API
   // https://exchangeratesapi.io/
-  // To change the base
-  //https://api.exchangeratesapi.io/latest?symbols=USD,GBP&base=JPY
   updateRate(fromCurrency, toCurrency) {
     axios
       .get(
@@ -120,14 +116,10 @@ export default class CurrEx extends Component {
           fromCurrency
       )
       .then((result) => {
-        console.log("1st: ", this.state.firstSelectedCurrency);
-        console.log("2nd: ", this.state.secondSelectedCurrency);
-        console.log("It's", result.data.rates);
-        console.log("boo", Object.values(result.data.rates)[0]);
         this.setState({ rate: Object.values(result.data.rates)[0] });
       });
   }
-  // Simpel Coversion based on the rate
+  // Simple Coversion based on the rate
   convertor = () => {
     let userInput = this.state.userInput;
     return userInput * this.state.rate;
