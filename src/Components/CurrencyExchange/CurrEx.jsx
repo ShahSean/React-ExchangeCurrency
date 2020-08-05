@@ -52,16 +52,17 @@ export default class CurrEx extends Component {
           <input
             type="number"
             step="0.00001"
+            min="0.000"
             placeholder="0.000"
+            className="user-input"
             onChange={(e) => {
               this.setState({ userInput: e.target.value });
             }}
           />
         </div>
         <br />
-        Rate is: {this.state.rate}
         <br />
-        <br />
+        <div className="real-time-rate">Current Rate is: {this.state.rate}</div>
         <br />
         <br />
         <div className="converted">
@@ -82,7 +83,8 @@ export default class CurrEx extends Component {
             })}
           </select>
           <br />
-          <br />| | | | <output>{this.convertor()}</output>
+          <br />
+          <output>{this.convertor()}</output>
         </div>
       </>
     );

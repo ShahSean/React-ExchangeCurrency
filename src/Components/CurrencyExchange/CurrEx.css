@@ -1,9 +1,15 @@
+body {
+  font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
+}
 .unconverted,
 .converted {
   background-color: rgba(180, 179, 179, 0.639);
   border-radius: 0.2rem;
-  font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
   text-align: center;
+  padding: 0.5rem;
+  width: 75%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .converted {
@@ -12,6 +18,21 @@
 .selec-drp-dwn {
   border-radius: 0.5rem;
   border: none;
+}
+
+.user-input {
+  border-radius: 0.6rem;
+  border: none;
+  outline: none;
+  margin: 0.6rem;
+  margin-top: 1rem;
+}
+.real-time-rate {
+  text-align: center;
+  background-color: rgba(212, 103, 103, 0.822);
+  width: 50%;
+  margin-left: 25%;
+  border-radius: 0.4rem;
 }
 
 /* https://www.countryflags.com/ */
