@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CurrDropDown from "./CurrDropDown";
 
 export default class CurrEx extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class CurrEx extends Component {
       <>
         <div className="unconverted">
           <label> Currency I have : </label>
-          <select
+          {/* <select
             name="currency"
             id="currencyOptionsList1"
             defaultValue={this.state.firstSelectedCurrency}
@@ -55,7 +56,8 @@ export default class CurrEx extends Component {
                 </option>
               );
             })}
-          </select>
+          </select> */}
+          <CurrDropDown data={this.state} />
           <br />
           <input
             type="number"
@@ -68,6 +70,10 @@ export default class CurrEx extends Component {
         </div>
         <br />
         Rate is: {this.state.rate}
+        <br />
+        <br />
+        \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+        <br />
         <br />
         <div className="converted">
           <label>Currency I want : </label>
