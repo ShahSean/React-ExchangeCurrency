@@ -1,13 +1,17 @@
-.unconverted {
+.unconverted,
+.converted {
   background-color: rgba(180, 179, 179, 0.639);
   border-radius: 0.2rem;
   font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 .converted {
   background-color: rgba(250, 198, 206, 0.753);
-  border-radius: 0.2rem;
-  font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
+}
+.selec-drp-dwn {
+  border-radius: 0.5rem;
+  border: none;
 }
 
 /* https://www.countryflags.com/ */

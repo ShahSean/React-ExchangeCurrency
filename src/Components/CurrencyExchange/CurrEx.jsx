@@ -47,17 +47,6 @@ export default class CurrEx extends Component {
               );
             })}
           </select>
-          <select>
-            <option
-              value="test"
-              style={{ backgroundImage: "url(" + "./img/UKFlag.png" + ") " }}
-            >
-              Tesssst
-            </option>
-            <option style={{ backgroundColor: "yello", color: "blue" }}>
-              jeloooo
-            </option>
-          </select>
 
           <br />
           <input
@@ -82,6 +71,7 @@ export default class CurrEx extends Component {
             id="currencyOptionsList2"
             defaultValue={this.state.secondSelectedCurrency}
             onChange={this.secondCurrencySelectionHandler}
+            className="selec-drp-dwn"
           >
             {this.state.currencyList.map((currency) => {
               return (
