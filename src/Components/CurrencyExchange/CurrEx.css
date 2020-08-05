@@ -1,0 +1,24 @@
+.unconverted {
+  background-color: rgba(180, 179, 179, 0.639);
+  border-radius: 0.2rem;
+  font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
+}
+
+.converted {
+  background-color: rgba(250, 198, 206, 0.753);
+  border-radius: 0.2rem;
+  font-family: "Comic Sans MS", Helvetica, Arial, sans-serif;
+}
+
+/* https://www.countryflags.com/ */
+/* .selec-drp-dwn option[value="USD"] {
+  background-image: url("./img/USFlag.png");
+}
+
+.selec-drp-dwn option[value="GBP"] {
+  background-image: url("./img/UKFlag.png");
+}
+
+.selec-drp-dwn option[value="CAD"] {
+  background-image: url("./img/CADFlag.png");
+} */

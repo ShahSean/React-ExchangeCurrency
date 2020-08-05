@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import CurrDropDown from "./CurrDropDown";
+import "./CurrEx.css";
+//import CurrDropDown from "./CurrDropDown";
 
 export default class CurrEx extends Component {
   constructor(props) {
@@ -19,18 +20,6 @@ export default class CurrEx extends Component {
     };
   }
 
-  // getRate(fromCurrency, toCurrency) {
-  //   const { rates } = this.state;
-  //   // String manipulation
-  //   const currency_key = `${fromCurrency}->${toCurrency}`;
-  //   if (currency_key in rates) return rates[currency_key];
-  //   else {
-  //     // TODO: update the currency bank for the current value
-  //     //       if there is another such fetch in the works, don't run it again
-  //     return 1;
-  //   }
-  // }
-
   componentDidMount() {
     this.updateRate(
       this.state.firstSelectedCurrency,
@@ -43,11 +32,12 @@ export default class CurrEx extends Component {
       <>
         <div className="unconverted">
           <label> Currency I have : </label>
-          {/* <select
+          <select
             name="currency"
             id="currencyOptionsList1"
             defaultValue={this.state.firstSelectedCurrency}
             onChange={this.firstCurrencySelectionHandler}
+            className="selec-drp-dwn"
           >
             {this.state.currencyList.map((currency) => {
               return (
@@ -56,8 +46,19 @@ export default class CurrEx extends Component {
                 </option>
               );
             })}
-          </select> */}
-          <CurrDropDown data={this.state} />
+          </select>
+          <select>
+            <option
+              value="test"
+              style={{ backgroundImage: "url(" + "./img/UKFlag.png" + ") " }}
+            >
+              Tesssst
+            </option>
+            <option style={{ backgroundColor: "yello", color: "blue" }}>
+              jeloooo
+            </option>
+          </select>
+
           <br />
           <input
             type="number"
@@ -72,7 +73,6 @@ export default class CurrEx extends Component {
         Rate is: {this.state.rate}
         <br />
         <br />
-        \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
         <br />
         <br />
         <div className="converted">
@@ -130,4 +130,16 @@ export default class CurrEx extends Component {
     let userInput = this.state.userInput;
     return userInput * this.state.rate;
   };
+
+  // getRate(fromCurrency, toCurrency) {
+  //   const { rates } = this.state;
+  //   // String manipulation
+  //   const currency_key = `${fromCurrency}->${toCurrency}`;
+  //   if (currency_key in rates) return rates[currency_key];
+  //   else {
+  //     // TODO: update the currency bank for the current value
+  //     //       if there is another such fetch in the works, don't run it again
+  //     return 1;
+  //   }
+  // }
 }

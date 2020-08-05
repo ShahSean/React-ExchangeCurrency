@@ -8,10 +8,10 @@ export default class CurrDropDown extends Component {
         <select
           name="currency"
           id="currencyOptionsList1"
-          defaultValue={this.state.firstSelectedCurrency}
-          onChange={this.firstCurrencySelectionHandler}
+          defaultValue={this.props.data.firstSelectedCurrency}
+          onChange={this.porps.onChangeHandler()}
         >
-          {this.state.currencyList.map((currency) => {
+          {this.props.data.currencyList.map((currency) => {
             return (
               <option value={currency.abbreviation} key={currency.id}>
                 {currency.title}
